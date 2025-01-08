@@ -30,9 +30,10 @@ public userId: number = -1;
 
   sendLoadAction(payload: number): void {
     console.log('id=', payload);
-    if (!payload) {
+    if (payload > 0) {
       this.userId = payload;
-      this.store.dispatch(loadUser({payload: this.userId}));
+      console.log('fire load action: ', payload);
+      this.store.dispatch(loadUser({payload: payload}));
     }
 
   }

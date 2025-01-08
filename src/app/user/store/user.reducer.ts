@@ -5,7 +5,7 @@ import {IUser} from "../../core/model/user.model";
 export const userFeatureKey = 'user';
 
 export interface State {
-  user: IUser | undefined
+  user?: IUser
 }
 
 export const initialState: State = {
