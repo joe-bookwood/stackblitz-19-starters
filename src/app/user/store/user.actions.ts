@@ -7,5 +7,10 @@ export const loadUser = createAction(
 
 export const userIsLoaded = createAction(
   '[User] User is loaded',
-   props<{ payload: { user: IUser } }>()
+   props<{ user: IUser }>()
+);
+
+export const error = createAction(
+  '[Fehler] error is occured',
+  props<{message: string}>()
 );

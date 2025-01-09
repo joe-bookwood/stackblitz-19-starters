@@ -4,7 +4,7 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {concatMap, map} from 'rxjs/operators';
 
 import {HttpResponse} from '@angular/common/http';
-import {loadUser, userIsLoaded} from './user.actions';
+import {error, loadUser, userIsLoaded} from './user.actions';
 import {UserService} from "../service/user.service";
 import {IUser} from "../../core/model/user.model";
 
@@ -18,7 +18,11 @@ export class UserEffects {
         return this.userService.find(payload).pipe(
           map((resp: HttpResponse<IUser>) => {
             let receivedUser: IUser | undefined = resp.body??undefined;
-            return userIsLoaded({payload: { user: receivedUser } })
+            if( receivedUser !== undefined) {
+              return userIsLoaded({user: receivedUser})
+            } else {
+              return error({message: 'ein Fehler im Service'})
+            }
           })
         )
       })  

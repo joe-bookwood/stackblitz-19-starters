@@ -17,6 +17,7 @@ export class UserService {
   protected resourceUrl = 'https://jsonplaceholder.typicode.com/users/';
 
   find(id: number): Observable<EntityResponseType> {
+    console.log('load user: ',id);
     return this.http.get<IUser>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
