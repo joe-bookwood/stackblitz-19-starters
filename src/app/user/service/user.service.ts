@@ -14,7 +14,7 @@ export class UserService {
   protected readonly http = inject(HttpClient);
   protected readonly applicationConfigService = inject(ApplicationConfigService);
 
-  protected resourceUrl = 'https://jsonplaceholder.typicode.com/users/';
+  protected resourceUrl = 'https://jsonplaceholder.typicode.com/users';
 
   find(id: number): Observable<EntityResponseType> {
     console.log('load user: ',id);
