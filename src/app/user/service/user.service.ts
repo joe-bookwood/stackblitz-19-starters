@@ -1,11 +1,10 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-import { isPresent } from 'app/core/util/operators';
-import { ApplicationConfigService } from 'app/core/config/application-config.service';
-import { createRequestOption } from 'app/core/request/request-util';
-import { IUser } from '../user.model';
+import {ApplicationConfigService} from "../../core/config/application-config.service";
+import {createRequestOption} from "../../core/request/request-util";
+import {isPresent} from "../../core/util/operators";
+import {IUser} from "../../core/model/user.model";
 
 export type EntityResponseType = HttpResponse<IUser>;
 export type EntityArrayResponseType = HttpResponse<IUser[]>;
@@ -15,9 +14,10 @@ export class UserService {
   protected readonly http = inject(HttpClient);
   protected readonly applicationConfigService = inject(ApplicationConfigService);
 
-  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/users');
+  protected resourceUrl = 'https://jsonplaceholder.typicode.com/users';
 
   find(id: number): Observable<EntityResponseType> {
+    console.log('load user: ',id);
     return this.http.get<IUser>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
@@ -27,7 +27,7 @@ export class UserService {
   }
 
   getUserIdentifier(user: Pick<IUser, 'id'>): number {
-    return user.id;
+    return <number>user.id;
   }
 
   compareUser(o1: Pick<IUser, 'id'> | null, o2: Pick<IUser, 'id'> | null): boolean {
