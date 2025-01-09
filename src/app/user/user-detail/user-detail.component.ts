@@ -1,11 +1,14 @@
 import {Component} from '@angular/core';
 import {Observable} from "rxjs";
 import {IUser} from "../../core/model/user.model";
-import {select, Store} from "@ngrx/store";
+import {select, Store, StoreModule} from "@ngrx/store";
 import {userSelector} from "../store/user.selectors";
+import { reducer, userFeatureKey } from "../store/user.reducer";
 import {loadUser} from "../store/user.actions";
 import {FormsModule} from "@angular/forms";
 import {AsyncPipe, JsonPipe} from "@angular/common";
+import { EffectsModule } from '@ngrx/effects';
+import { UserEffects } from '../store/user.effects';
 
 @Component({
   selector: 'app-user-detail',
